@@ -19,7 +19,9 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "tailwind-merge": "3.6.0",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "class-variance-authority": "0.7.1",
+    "sonner": "^2.0.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.2.1",

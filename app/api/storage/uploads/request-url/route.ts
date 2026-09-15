@@ -1,0 +1,3 @@
+import {guard} from '@/lib/access';
+import {reserveUpload} from '@/lib/platform';
+export async function POST(req:Request){const denied=await guard(req);if(denied)return denied;try{const {type,size}=await req.json();const ext:Record<string,string>={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};if(!ext[type]||!Number.isFinite(size)||size<=0||size>10485760)return Response.json({error:'Selecciona JPEG, PNG o WebP de hasta 10 MB.'},{status:400});return Response.json(await reserveUpload(crypto.randomUUID()+'.'+ext[type],type))}catch{return Response.json({error:'No se pudo iniciar la carga'},{status:500})}}

@@ -1,0 +1,1 @@
+export async function authRequest(path:string,body:unknown){const base=process.env.SUPABASE_URL,key=process.env.SUPABASE_ANON_KEY;if(!base||!key)throw Error('Falta configurar la autenticación');return fetch(base+'/auth/v1/'+path,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'})}

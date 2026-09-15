@@ -1,0 +1,3 @@
+import {currentEmail,setting} from '@/lib/platform';
+export async function access(){const email=await currentEmail(),allowed=setting('NANYVET_ADMIN_EMAIL');return {authenticated:!!email,authorized:!!email&&!!allowed&&email.toLowerCase()===allowed.trim().toLowerCase()}}
+export async function guard(req?:Request){const a=await access();if(!a.authorized)return Response.json({error:a.authenticated?'Acceso Denegado':'Inicia sesión para continuar.'},{status:a.authenticated?403:401});if(req&&req.method!=='GET'&&req.headers.get('origin')!==new URL(req.url).origin)return Response.json({error:'Origen no permitido'},{status:403});return null}
